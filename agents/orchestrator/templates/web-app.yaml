@@ -1,0 +1,40 @@
+# Web 应用项目模板
+name: web-app
+label: Web 应用
+description: 从设计到上线的完整 Web 应用开发
+
+stages:
+  design:
+    roles:
+      - agents/design-ui-designer
+      - agents/design-ux-researcher
+    deliverables:
+      - 设计稿 (Figma/HTML)
+      - UX 流程图
+      - 交互原型
+
+  frontend:
+    roles:
+      - agents/engineering-frontend-developer
+    depends_on: [design]
+    deliverables:
+      - 前端代码
+      - 组件文档
+
+  backend:
+    roles:
+      - agents/engineering-backend-architect
+    depends_on: [design]
+    deliverables:
+      - API 接口
+      - 数据库设计
+      - 后端代码
+
+  testing:
+    roles:
+      - agents/testing-api-tester
+      - agents/testing-performance-benchmarker
+    depends_on: [frontend, backend]
+    deliverables:
+      - 测试报告
+      - 性能分析

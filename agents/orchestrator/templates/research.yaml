@@ -1,0 +1,30 @@
+# 研究分析项目模板
+name: research
+label: 研究分析
+description: 市场调研、技术选型、可行性分析等研究类项目
+
+stages:
+  research:
+    roles:
+      - agents/academic-psychologist
+      - agents/marketing-market-research-analyst
+    deliverables:
+      - 研究数据
+      - 竞品分析
+
+  analysis:
+    roles:
+      - agents/strategy-executive-brief
+      - agents/business-strategist
+    depends_on: [research]
+    deliverables:
+      - 分析报告
+      - 数据可视化
+
+  recommendation:
+    roles:
+      - agents/strategy-consulting
+    depends_on: [analysis]
+    deliverables:
+      - 建议方案
+      - 执行路线图
