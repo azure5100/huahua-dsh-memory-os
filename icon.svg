@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300" role="img" aria-label="huahua 七色光谱花蕊标志">
+  <!-- huahua · 光谱花蕊 · 7 色（源：http://127.0.0.1:9531/api/nodes/0630b0307d35 ，2026-10-19 静态化） -->
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FF5A4E"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FF9A3C" transform="rotate(51.43 150 150)"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FFD93D" transform="rotate(102.86 150 150)"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#3DDC84" transform="rotate(154.29 150 150)"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#35C4D9" transform="rotate(205.71 150 150)"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#4C7DFF" transform="rotate(257.14 150 150)"/>
+  <path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#A855F7" transform="rotate(308.57 150 150)"/>
+  <circle cx="150" cy="150" r="25" fill="#0d0f14" stroke="#e8ecf4" stroke-width="1.5" opacity=".92"/>
+  <circle cx="150" cy="150" r="8.5" fill="#e8ecf4"/>
+</svg>

@@ -6,6 +6,7 @@
   "type": "module",
   "main": "lib/index.js",
   "files": [
+    "icon.svg",
     "lib/**",
     "!lib/**/*.bak",
     "!lib/**/*.corrupt-*",
@@ -54,5 +55,6 @@
     "todo",
     "skills",
     "hos"
-  ]
+  ],
+  "icon": "icon.svg"
 }
