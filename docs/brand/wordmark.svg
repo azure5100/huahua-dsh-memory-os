@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="HOS · huahua-memory-os 艺术字">
+  <defs>
+    <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0.00%" stop-color="#FF5A4E"/>
+      <stop offset="16.67%" stop-color="#FF9A3C"/>
+      <stop offset="33.33%" stop-color="#FFD93D"/>
+      <stop offset="50.00%" stop-color="#3DDC84"/>
+      <stop offset="66.67%" stop-color="#35C4D9"/>
+      <stop offset="83.33%" stop-color="#4C7DFF"/>
+      <stop offset="100.00%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="spectrumV" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0.00%" stop-color="#FF5A4E"/>
+      <stop offset="16.67%" stop-color="#FF9A3C"/>
+      <stop offset="33.33%" stop-color="#FFD93D"/>
+      <stop offset="50.00%" stop-color="#3DDC84"/>
+      <stop offset="66.67%" stop-color="#35C4D9"/>
+      <stop offset="83.33%" stop-color="#4C7DFF"/>
+      <stop offset="100.00%" stop-color="#A855F7"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="440" fill="#0d0f14"/>
+
+  <!-- 花蕊标记（左上，缩小版） -->
+  <g transform="translate(120 96) scale(0.30) translate(-150 -150)" opacity="0.95">
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FF5A4E"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FF9A3C" transform="rotate(51.43 150 150)"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#FFD93D" transform="rotate(102.86 150 150)"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#3DDC84" transform="rotate(154.29 150 150)"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#35C4D9" transform="rotate(205.72 150 150)"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#4C7DFF" transform="rotate(257.15 150 150)"/>
+<path d="M150 150 C116 118 118 74 150 44 C182 74 184 118 150 150 Z" fill="#A855F7" transform="rotate(308.58 150 150)"/>
+    <circle cx="150" cy="150" r="25" fill="#0d0f14" stroke="#e8ecf4" stroke-width="1.5"/>
+    <circle cx="150" cy="150" r="8.5" fill="#e8ecf4"/>
+  </g>
+
+  <!-- 主字 HOS -->
+  <text x="208" y="200" font-family="'Segoe UI Semibold','Segoe UI',system-ui,-apple-system,'PingFang SC',sans-serif"
+        font-size="176" font-weight="700" letter-spacing="18" fill="url(#spectrum)" filter="url(#soft)">HOS</text>
+
+  <!-- 副字 huahua-memory-os -->
+  <text x="212" y="278" font-family="ui-monospace,'Cascadia Mono','Consolas',monospace"
+        font-size="42" letter-spacing="6" fill="#c9d1e0">huahua<tspan fill="#7c869c">-</tspan>memory<tspan fill="#7c869c">-</tspan>os</text>
+
+  <!-- 光谱色带 -->
+  <rect x="120" y="330" width="38" height="7" rx="3.5" fill="#FF5A4E"/>
+  <rect x="166" y="330" width="38" height="7" rx="3.5" fill="#FF9A3C"/>
+  <rect x="212" y="330" width="38" height="7" rx="3.5" fill="#FFD93D"/>
+  <rect x="258" y="330" width="38" height="7" rx="3.5" fill="#3DDC84"/>
+  <rect x="304" y="330" width="38" height="7" rx="3.5" fill="#35C4D9"/>
+  <rect x="350" y="330" width="38" height="7" rx="3.5" fill="#4C7DFF"/>
+  <rect x="396" y="330" width="38" height="7" rx="3.5" fill="#A855F7"/>
+
+  <!-- 说明 -->
+  <text x="120" y="392" font-family="'Segoe UI',system-ui,-apple-system,'PingFang SC',sans-serif"
+        font-size="17" letter-spacing="5" fill="#7c869c">HUA HUA · MEMORY OS · SEVEN-COLOR SPECTRUM BLOOM</text>
+</svg>
