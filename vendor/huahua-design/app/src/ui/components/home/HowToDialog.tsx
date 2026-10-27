@@ -28,7 +28,7 @@ export function HowToDialog({ onClose }: Props) {
         </div>
 
         <div className="bd-how-actions">
-          <a className="is-source" href="https://github.com/yanglongyun/huahua-design" target="_blank" rel="noreferrer">
+          <a className="is-source" href="https://github.com/azure5100/huahua-design" target="_blank" rel="noreferrer">
             {t('how.source')}
             <span aria-hidden="true">↗</span>
           </a>
