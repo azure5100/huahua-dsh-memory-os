@@ -1,5 +1,10 @@
 # dsh-memory-evolve
 
+> **路径说明（2026-10-27 校正）**：本文所有 `~/.dsh` / `<DSH_HOME>` 一律指 **DSH_HOME**。
+> **本机桌面端的 DSH_HOME = `D:\DSH\dsh-home`** ⇒ 记忆数据实际在 `D:\DSH\dsh-home\memories\`。
+> `C:\Users\cosmo\.dsh` 是**另一个 DSH 实例（web profile / 丽丽那端）**的 home，与本插件在桌面端的数据**互不相通**。
+
+
 为 DeepSeek Harness 带来「跨会话长期记忆 + 后台自我进化」能力的纯插件实现：**五轨记忆 · git 分支感知 · 回合内自我审查 · 技能自我进化与技能管理器 · 四轨待办 · COI 调度 · 会话广播 · 会话编排 · 会话搜索 · 提示词管理器 · 临时信息便签 · 模型设置 · Web UI 设置**——**零核心修改、零运行时依赖**，随装随用、卸载即净。
 
 > **🚀 COI 调度使用文档**：[docs/COI-调度.md](docs/COI-调度.md) —— 把任务派给 kimi/codex/grok/hermes 等外部 CLI：三层入口、适配器管理、会话分层、记忆注入、命令/工具参考。**默认禁用**，启用见「Memory Evolve 设置」Tab 的「配置」。
@@ -23,7 +28,7 @@
 - 📌 **提示词管理器**：可复用的**指令范式资产库 + 注入执行器**——把常用工作范式（代码审查 / 调试 / PRD / 测试等）固化成提示词（含**简介**与**启用状态**，禁用后 AI 不可见不可注入），**选中即注入：模型下一轮自动看到、不打断回复**（次数/间隔可输入任意数字，支持持续注入 / 间隔提醒，可随时停止）；也能**临时注入**——不建提示词直接输入内容注入，自动存入提示词库；内置 13 条 GitHub 真实提示词（SpecRoute / Claude-Code-Promts-Skills），分类可自定义；**AI 可经 `de_prompts` 工具查询/注入**（也供子会话/子代理/CLI 任务取用）；**默认关闭**，按需在「Memory Evolve 设置」Tab 的「配置」启用
 - 🧩 **模型设置**：「模型设置」Tab + `de_models` 工具——以表格一览 DSH 现有供应商与模型，给每个模型设置**插件侧**的启用状态、备注、是否支持思考、可用/推荐思考等级（可勾选等级白名单、添加自定义等级），AI 可经 `de_models` 查询可用模型清单。**⚠️ 这些配置只对本插件有用（决定 de_models 查询口径与 Tab 展示），不修改、也不影响 DSH 自身的模型设置**——DSH 的模型配置仍以官方「设置 → 模型」为准。**默认关闭**，按需在「Memory Evolve 设置」Tab 的「配置」启用
 - 🎨 **Web UI 设置**：给 DSH web 界面加样式级小功能（**纯客户端注入**，不改框架源码、随 DSH 更新不掉）——「Web UI 设置」Tab「综合」里是各功能的**独立小开关**（**模块与功能默认全部关闭**，由你主动开启）：**会话筛选**（左侧列表只显示进行中的会话，纯 idle 折叠，开启后默认「仅进行中」、可一键切回全部）、**对话区加宽**（中间区域从约一半扩大到右侧约 95%，与上方 Tab 导航条对齐）等。后期扩展：主题更换等。**独立开关**（uiSettingsEnabled，默认关闭）
-- 📝 **临时信息**：会话页独立的「临时信息」Tab——Markdown 便签随手记，内容持久保存在 `~/.dsh/memories/scratch.md`，重启不丢，整理完后迁移或删除即可
+- 📝 **临时信息**：会话页独立的「临时信息」Tab——Markdown 便签随手记，内容持久保存在 `<DSH_HOME>/memories/scratch.md`，重启不丢，整理完后迁移或删除即可
 - 🔍 **本地搜索**：记忆不足时按文件名搜本地文件——**不止文档，图片/代码/配置等一切与项目相关的文件都能找**（默认只搜文档扩展名，需要时可全类型搜索）；**还能按文件内容搜**（"哪个文档里提过 XX"）——`contentQuery` 参数即开内容检索，rg 全文匹配毫秒级
 - 🔖 **会话书签**：给对话**每一轮打星标记**（轮尾 ☆ 按钮），「书签」Tab 独立列表**一键跳回任意轮**（支持搜索）；**从任意轮创建官方分支**——书签列表「分支」按钮，或直接点官方分支按钮（中间轮被 Memory Evolve 接管：悬浮标注 + 点击弹确认，走官方 fork 通道，最后一轮保持官方行为）。**独立开关**（bookmarkEnabled，默认关闭）
 - 🎯 **会话评审（Advisor）**：给每个会话挂一个**独立评审员**——只观察你在界面上看到的对话（用户消息 + Agent 回复正文，不含思考/工具调用参数），**每轮实时评审**，需要时以**用户指令形式**注入当前会话实时提醒（info/nit/concern/blocker 四级；info 默认仅记录不注入，可配置注入）。评审员是**持续会话**（完整上下文、永不截断），面板可**新建评审会话**清空重来、可**直接向它提问**；支持**四层级约束**（系统提示词/项目约束/会话约束/本次评审会话约束，越局部越优先）；评审记录 JSONL 持久化可查。**默认关闭**，按需在「Memory Evolve 设置」Tab 的「配置」启用
@@ -68,10 +73,10 @@
 | 项目日志（`project`） | 当前项目的约定与进展 | **不注入**，按需读取（`memory` 工具，按 cwd 隔离） | 每回合主动写入（无需确认） |
 | 每日日志（`daily`） | 今天做了什么 | **不注入**，按需读取（`memory` 工具） | 每回合主动写入（无需确认） |
 
-记忆文件位置（默认 `~/.dsh/memories/`）：
+记忆文件位置（默认 `<DSH_HOME>/memories/`）：
 
 ```
-~/.dsh/memories/
+<DSH_HOME>/memories/
 ├── MEMORY.md                       # 全局事实（§ 分隔条目格式）
 ├── USER.md                         # 用户档案
 ├── SUGGESTIONS.jsonl               # 待确认建议队列
@@ -107,7 +112,7 @@
 
 ## 技能管理器（合并自 dsh-skill-browser）
 
-> ⚠️ **与独立插件 dsh-skill-browser（dsh-skills-manager）冲突**：技能管理功能已整体并入本插件（宿主端 `lib/skills-manager.js` + 记忆 Tab「技能管理」子 Tab，API 前缀沿用 `/skills-manager`）。**不要同时启用两者**——两套 disabled shadow 会对同一技能重复注册、两套 custom-dir provider 会重复扫描。迁移步骤：从 `~/.dsh/config.yaml` 移除 `skills-manager` 的 insert，重启 `dsh web`。
+> ⚠️ **与独立插件 dsh-skill-browser（dsh-skills-manager）冲突**：技能管理功能已整体并入本插件（宿主端 `lib/skills-manager.js` + 记忆 Tab「技能管理」子 Tab，API 前缀沿用 `/skills-manager`）。**不要同时启用两者**——两套 disabled shadow 会对同一技能重复注册、两套 custom-dir provider 会重复扫描。迁移步骤：从 `<DSH_HOME>/config.yaml` 移除 `skills-manager` 的 insert，重启 `dsh web`。
 
 - **入口**：会话页「技能」Tab → 「技能管理」子 Tab（与「待确认技能建议」并列，三栏布局：技能列表 + 目录树 + 文件查看/编辑器）。
 - **技能总览**：全部技能按来源分层展示——`user-dsh` / `user-agents`（用户注入）、`custom`（自定义目录，含本插件 UI 添加的）、`bundled`（系统内置）、`project-dsh` / `project-agents`（项目级，标「系统」徽标、**不可禁用**）；每张卡片显示名称、描述、适用场景、来源徽标、资源类型。
@@ -115,7 +120,7 @@
 - **禁用 / 启用**：一键禁用把技能从模型技能目录中移除（260810 快照起技能按 agent preset scope 分层，禁用落地为**改写 SKILL.md frontmatter 的 `disable-model-invocation: true`**——skill-local 官方解析该字段 → `modelInvocable: false`，模型不再看到、`skill` 工具拒绝加载；对 scope 层（preset）与 global 层技能都生效）；禁用列表持久化保存（`skills-state.json`），**启动时自动把「旧禁用列表里当前仍可调用」的技能落地标记**（迁移 shadow 机制的历史禁用项）；随时可重新启用（移除标记）；`bundled`（DSH 安装目录内置）技能结构性不可禁用、`project` 源同样受保护；global 层技能另有 runtime shadow 兜底（与 frontmatter 标记互斥，标记后不再注册 shadow）。`skill_manage` 工具天然跳过被禁用的技能。
 - **自定义技能目录**：直接添加/移除你自己的技能目录（`<目录>/<技能>/SKILL.md` 或 `<目录>/<技能>.md` 布局，`~` 展开），与已有技能根重叠的路径会被拒绝；永久保存，重启后自动加载。
 - **文件浏览与编辑**：选中技能后以目录树浏览其本地目录（懒加载、面包屑、根切换），点击文本文件查看/编辑（行号、Ctrl/Cmd+S 保存、未保存确认）；读写均限技能目录范围内，越界/二进制/超大被拒。
-- **禁用列表迁移**：首次启动（无 `skills-state.json`）时自动从原独立插件的 `~/.dsh/plugins/dsh-skill-browser/state.json` **一次性导入**禁用列表与自定义目录并持久化——卸载原插件不会丢你的选择；之后以本插件的 `~/.dsh/memories/skills-state.json` 为准。
+- **禁用列表迁移**：首次启动（无 `skills-state.json`）时自动从原独立插件的 `<DSH_HOME>/plugins/dsh-skill-browser/state.json` **一次性导入**禁用列表与自定义目录并持久化——卸载原插件不会丢你的选择；之后以本插件的 `<DSH_HOME>/memories/skills-state.json` 为准。
 
 ## 待办（dtodo）
 
@@ -136,7 +141,7 @@
 
 会话页顶部的独立 Tab「临时信息」——一个**持久化的 Markdown 便签**，与记忆/技能/待办等 Tab 并列（conversation.view entry，探测 host API 存在即注册，无需开关）：
 
-- **用途**：临时想法、随手记都放这里——内容持久保存在 `~/.dsh/memories/scratch.md`，**跨 DSH web 重启保留**；整理完成后迁移到别处或删除即可；
+- **用途**：临时想法、随手记都放这里——内容持久保存在 `<DSH_HOME>/memories/scratch.md`，**跨 DSH web 重启保留**；整理完成后迁移到别处或删除即可；
 - **与记忆文件无关**：scratch.md 是自由文本（不是 § 分隔的结构化记忆），用户可以随意编辑，**不会破坏任何解析格式**；读写均有大小上限（512 KiB）与**原子写**保护（先写临时文件再 rename）；
 - **编辑体验**：等宽字体编辑区（Markdown 格式）+ 显式「保存」按钮（**Ctrl/Cmd+S** 快捷键，只在编辑区聚焦时拦截）+ **未保存脏标记**提示 + 上次保存时间展示 + 保存/加载失败提示；
 - **用系统工具打开**：一键在系统编辑器/访达中打开 scratch.md（复用宿主 reveal 通道）；
@@ -282,12 +287,12 @@ DSH 会话之间传递消息的轻量子功能，**独立于 COI 调度框架**�
 `/skills-manager`）。**升级前请先卸载旧插件，再启用本插件**，顺序不能反：
 
 1. **移除注册**：从 profile 的 `cordis.patch.yml`（或 08-06 之前的
-   `~/.dsh/config.yaml` / `~/.dsh/cordis.patch.yml`）删除 skills-manager /
+   `<DSH_HOME>/config.yaml` / `<DSH_HOME>/cordis.patch.yml`）删除 skills-manager /
    skill-browser 的 insert 行；
 2. **删除软链别名**：若存在 `~/node_modules/@dsh-local/skills-manager` 或
    `~/node_modules/@dsh-local/dsh-skill-browser`，一并删除；
-3. **插件目录可留可删**：`~/.dsh/plugins/dsh-skills-manager/` 与
-   `~/.dsh/plugins/dsh-skill-browser/` 目录删除与否都不影响迁移——本插件
+3. **插件目录可留可删**：`<DSH_HOME>/plugins/dsh-skills-manager/` 与
+   `<DSH_HOME>/plugins/dsh-skill-browser/` 目录删除与否都不影响迁移——本插件
    首次启动时会自动从两个旧插件的 `state.json` 导入禁用列表与自定义目录
    （只导入一次，先旧名后新名，取第一个有数据的来源），因此旧目录建议
    保留到确认迁移成功后再清理。
@@ -310,7 +315,7 @@ DSH 会话之间传递消息的轻量子功能，**独立于 COI 调度框架**�
 # 1. 安装到 profile（本地目录用 link:，也可用 git/registry 包地址）
 dsh plugin --profile web add link:/path/to/dsh-memory-evolve
 
-# 2. 在 profile 的 patch 层注册（编辑 ~/.dsh/profiles/web/cordis.patch.yml）：
+# 2. 在 profile 的 patch 层注册（编辑 <DSH_HOME>/profiles/web/cordis.patch.yml）：
 ```
 
 ```yaml
@@ -331,12 +336,12 @@ dsh plugin --profile web add link:/path/to/dsh-memory-evolve
 ### 旧机制（DSH 08-06 之前，不再推荐）
 
 ```sh
-mkdir -p ~/.dsh/plugins
-cp -r dsh-memory-evolve ~/.dsh/plugins/
-ln -s ~/.dsh/plugins/dsh-memory-evolve ~/node_modules/@dsh-local/dsh-memory-evolve
+mkdir -p <DSH_HOME>/plugins
+cp -r dsh-memory-evolve <DSH_HOME>/plugins/
+ln -s <DSH_HOME>/plugins/dsh-memory-evolve ~/node_modules/@dsh-local/dsh-memory-evolve
 ```
 
-在 `~/.dsh/config.yaml` 追加（08-06 起该文件已不再被读取，仅旧版 DSH 适用）：
+在 `<DSH_HOME>/config.yaml` 追加（08-06 起该文件已不再被读取，仅旧版 DSH 适用）：
 
 ```yaml
 - insert:
@@ -449,7 +454,7 @@ agent 会通过 `memory` 工具读写记忆，通过 `skill_manage` 工具管理
 
 | 键 | 默认 | 说明 |
 |---|---|---|
-| `memoryDir` | `~/.dsh/memories` | 记忆目录 |
+| `memoryDir` | `<DSH_HOME>/memories` | 记忆目录 |
 | `perTurnProjectWrites` | `true` | 每回合写入项目日志：每轮收尾向该轨写入 1 条本回合进展；关 = 项目日志仅按需读取 |
 | `perTurnDailyWrites` | `true` | 每回合写入每日日志：每轮收尾向该轨写入 1 条本回合进展；关 = 每日日志仅按需读取 |
 | `perTurnKeyWrites` | `true` | 每回合检查项目关键记忆：每轮收尾判断是否出现重要项目事实（长期约定/决策/架构/踩坑），有则写入 `key` 轨（自动注入），没有就跳过；关 = key 仅保留手动添加与读取 |

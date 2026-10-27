@@ -1,0 +1,7 @@
+# Mount huahua-dsh-memory-os (HOS) in any DSH profile that installs this package.
+# `insert` adds this plugin's loader row; `name` resolves through the profile's node_modules.
+# Reconstituted 2026-10-27: the file was missing from the published tarball, so a
+# dsh.profile.bundles entry for this package could not be mounted.
+- insert:
+    - id: huahua-dsh-memory-os
+      name: huahua-dsh-memory-os
