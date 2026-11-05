@@ -1,0 +1,13 @@
+release: HOS v1.6.5 — 技能归属修正（skillDir 默认指向 DSH 自己的目录）
+
+概念修正：skillDir 默认值从 ~/.agents/skills（跨工具通用层，属于其他 agent）
+改为 <DSH_HOME>/skills（DSH 自身技能目录），与 dsh-skills-manager 口径一致。
+
+顺带修一个只在非系统盘安装时出现的崩溃：
+待确认队列在 <DSH_HOME>/memories/pending-skills，技能库默认在 ~/.agents/skills，
+两者跨设备时 approvePendingSkill() 的 renameSync() 抛 EXDEV。改默认值后同盘，问题消失。
+
+兼容：显式配置 skillDir 的用户行为不变。
+升级后需重启桌面端（host 半改动）。
+
+详见 RELEASE-v1.6.5.md
