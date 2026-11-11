@@ -6,3 +6,8 @@ node_modules/
 _publish/
 .dsh/
 .idea/
+
+# 发布产物（只出 release 资产，不入库）
+huahua-dsh-memory-os-*.tgz
+huahua-dsh-memory-os-*.zip
+RELEASE-*.md
